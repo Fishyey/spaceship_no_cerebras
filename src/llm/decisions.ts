@@ -1,9 +1,5 @@
 const API_URL = "https://generativelanguage.googleapis.com/v1beta/decisions"
 
-export const KEY_STORAGE = "gemini-api-key"
-
-export const storedGeminiKey = () => localStorage.getItem(KEY_STORAGE)?.trim()
-
 export type Resolution = "low" | "medium" | "high" | "ultra_high"
 
 export type ContentBlock =

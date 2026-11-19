@@ -1,29 +1,25 @@
-import { KEY_STORAGE as CEREBRAS_KEY_STORAGE } from "../llm/cerebras.ts"
-import { KEY_STORAGE as GEMINI_KEY_STORAGE } from "../llm/decisions.ts"
-
-/** Each key's field in the dialog's form, by name, and where it is kept for reuse. */
-const KEY_FIELDS = { cerebras: CEREBRAS_KEY_STORAGE, gemini: GEMINI_KEY_STORAGE }
+import { KEY_STORAGE } from "../llm/gemini.ts"
 
 /**
  * Sim plays simulated sources; flight calls the models. The sources are chosen when the page loads, so switching reloads it in the other mode.
- * Launching always asks for both API keys first, prefilled with the ones kept from last time; the dialog's submit button returns "live".
+ * Launching asks for the Gemini API key, prefilled with the one kept from last time; the dialog's submit button returns "live".
  */
 export function bindModeToggle(toggle: HTMLButtonElement, dialog: HTMLDialogElement, isLive: boolean) {
   const form = dialog.querySelector("form")!
-  const inputOf = (name: string) => form.elements.namedItem(name) as HTMLInputElement
+  const keyInput = form.elements.namedItem("gemini") as HTMLInputElement
   toggle.setAttribute("aria-pressed", `${isLive}`)
   toggle.querySelector("b")!.textContent = isLive ? "flight" : "sim"
 
   toggle.addEventListener("click", () => {
     if (isLive) return reloadAs(false)
-    for (const [name, storageKey] of Object.entries(KEY_FIELDS)) inputOf(name).value = localStorage.getItem(storageKey) ?? ""
+    keyInput.value = localStorage.getItem(KEY_STORAGE) ?? ""
     dialog.showModal()
   })
   dialog.addEventListener("close", () => {
     const choice = dialog.returnValue
     dialog.returnValue = ""
     if (choice !== "live") return
-    for (const [name, storageKey] of Object.entries(KEY_FIELDS)) localStorage.setItem(storageKey, inputOf(name).value.trim())
+    localStorage.setItem(KEY_STORAGE, keyInput.value.trim())
     reloadAs(true)
   })
 }

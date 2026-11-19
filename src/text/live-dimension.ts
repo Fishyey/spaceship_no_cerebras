@@ -1,4 +1,4 @@
-import { storedApiKey, streamCompletion } from "../llm/cerebras.ts"
+import { storedGeminiKey, streamCompletion } from "../llm/gemini.ts"
 import type { Dimension, DimensionContext, DimensionSource } from "./dimension.ts"
 
 const MENU_SIZE = 5
@@ -44,7 +44,7 @@ mode: dialogue | action | description
 
 /** One call offers the menu: the free catalog axes that matter most here, with the story's characters as the options of `focus`. Axes the model leaves out or garbles are filled in from the catalog. */
 export const liveDimension: DimensionSource = async function* (context, signal) {
-  const apiKey = storedApiKey()
+  const apiKey = storedGeminiKey()
   if (!apiKey) throw new Error("save an API key first")
 
   const takenNames = context.taken.map(({ name }) => name.toLowerCase())

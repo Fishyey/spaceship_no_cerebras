@@ -647,7 +647,7 @@
       #sound-toggle[aria-pressed="false"] {
         color: var(--ink-4);
       }
-      /* Asks for the API keys each time live mode is entered. */
+      /* Asks for the API key each time live mode is entered. */
       #live-keys {
         width: min(48ch, 100% - 2 * var(--padding));
         padding: calc(2 * var(--gap));
@@ -877,23 +877,7 @@
     <dialog id="live-keys" aria-labelledby="live-keys-title" aria-describedby="live-keys-note" closedby="closerequest">
       <form method="dialog" autocomplete="off">
         <h2 id="live-keys-title">launch</h2>
-        <p id="live-keys-note">Lift off from the simulator to call the real API with your own keys, kept in this browser's local storage.</p>
-        <label
-          >cerebras
-          <input
-            name="cerebras"
-            type="text"
-            required
-            autocomplete="off"
-            autocapitalize="off"
-            autocorrect="off"
-            spellcheck="false"
-            data-1p-ignore
-            data-lpignore="true"
-            data-bwignore
-            data-form-type="other"
-            autofocus
-        /></label>
+        <p id="live-keys-note">Lift off from the simulator with your Gemini API key, kept in this browser's local storage.</p>
         <label
           >gemini
           <input
@@ -908,6 +892,7 @@
             data-lpignore="true"
             data-bwignore
             data-form-type="other"
+            autofocus
         /></label>
         <p class="actions">
           <button type="button" command="close" commandfor="live-keys">abort</button>

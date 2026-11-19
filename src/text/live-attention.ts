@@ -1,4 +1,4 @@
-import { storedApiKey, streamCompletion } from "../llm/cerebras.ts"
+import { storedGeminiKey, streamCompletion } from "../llm/gemini.ts"
 import type { AttentionBox, AttentionSource } from "./attention.ts"
 import { wordSpans } from "./segments.ts"
 
@@ -21,7 +21,7 @@ She lay [still] and
 `.trim()
 
 export const liveAttention: AttentionSource = async function* (text, signal) {
-  const apiKey = storedApiKey()
+  const apiKey = storedGeminiKey()
   if (!apiKey) throw new Error("save an API key first")
 
   const textWords = wordsOf(text)
