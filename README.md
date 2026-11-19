@@ -60,8 +60,6 @@ The app does not inspect or change the model's internal attention, weights, or h
 
 To change live mode's possible starting phrases, edit [`src/story/openings.ts`](./src/story/openings.ts). Its continuation instructions are in [`src/story/prompt.ts`](./src/story/prompt.ts) and [`src/text/live-completion.ts`](./src/text/live-completion.ts). Sim mode's filler-word dictionary is in [`src/text/completion.ts`](./src/text/completion.ts).
 
-[`src/llm/gemini.ts`](./src/llm/gemini.ts) is required application source code and should be committed. It contains the Gemini endpoint and request logic, **not** your API key. The browser stores the key in local storage. Keep `.env` and real keys out of Git.
-
 ## Conjecture
 
 > In the near future, LLM and Decision Models will reach 60 FPS interactivity.
